@@ -1,0 +1,155 @@
+================================================================================
+                    PRINTER SHARING FIX TOOL
+                         FILE INDEX
+================================================================================
+
+📋 PANDUAN CEPAT
+----------------
+Baru pertama kali? Baca file ini dulu:
+  📄 MULAI-DISINI.txt          ← START HERE!
+
+
+🚀 FILE UTAMA (JALANKAN INI)
+-----------------------------
+  📁 PrinterSharingFix-AutoAdmin.bat    ⭐ RECOMMENDED! (Auto Administrator)
+  📁 PrinterSharingFix.bat              (Manual Administrator)
+  📁 Test-Prerequisites.bat             (Cek sistem sebelum fix)
+
+
+📚 DOKUMENTASI
+--------------
+  📄 README.md                  Dokumentasi lengkap (buka dengan Notepad)
+  📄 MULAI-DISINI.txt          Quick start guide
+  📄 BACKUP-INFO.txt           Info lengkap backup & restore
+  📄 CHANGELOG.txt             Riwayat perubahan & update
+  📄 INDEX.txt                 File ini (daftar semua file)
+
+
+🔧 SCRIPT POWERSHELL (Jangan jalankan langsung!)
+-------------------------------------------------
+  📜 PrinterSharingFix-Server.ps1    Script untuk komputer SERVER
+  📜 PrinterSharingFix-Client.ps1    Script untuk komputer CLIENT
+  
+  Catatan: Gunakan file .bat di atas untuk menjalankan script ini
+
+
+🛠️ UTILITY
+-----------
+  📁 Buka-Folder-Backup.bat    Buka folder backup dengan cepat
+
+
+================================================================================
+QUICK REFERENCE
+================================================================================
+
+UNTUK PEMULA:
+1. Baca: MULAI-DISINI.txt
+2. Jalankan: PrinterSharingFix-AutoAdmin.bat
+3. Pilih: [1] Server atau [2] Client
+4. Klik: "JALANKAN SEMUA PERBAIKAN"
+5. Backup: Pilih "Yes" saat ditanya
+6. Restart komputer
+
+
+UNTUK TROUBLESHOOTING:
+1. Jalankan: Test-Prerequisites.bat (cek sistem)
+2. Baca: README.md (troubleshooting section)
+3. Cek: Folder backup (Documents\Backup Printer)
+4. Restore: Jika perlu, gunakan tombol Restore di tool
+
+
+UNTUK BACKUP/RESTORE:
+1. Baca: BACKUP-INFO.txt
+2. Backup: Tombol "💾 Backup Registry Sekarang"
+3. Restore: Tombol "♻️ Restore dari Backup"
+4. Lokasi: Documents\Backup Printer
+
+
+================================================================================
+STRUKTUR FILE
+================================================================================
+
+Printer Sharing Fix Tool/
+│
+├── 📄 INDEX.txt (File ini)
+├── 📄 MULAI-DISINI.txt
+├── 📄 README.md
+├── 📄 BACKUP-INFO.txt
+├── 📄 CHANGELOG.txt
+│
+├── 🚀 LAUNCHER (Gunakan ini!)
+│   ├── PrinterSharingFix-AutoAdmin.bat ⭐
+│   ├── PrinterSharingFix.bat
+│   └── Test-Prerequisites.bat
+│
+├── 🔧 SCRIPTS (Dipanggil oleh launcher)
+│   ├── PrinterSharingFix-Server.ps1
+│   └── PrinterSharingFix-Client.ps1
+│
+└── 🛠️ UTILITY
+    └── Buka-Folder-Backup.bat
+
+
+================================================================================
+ERROR CODES YANG DITANGANI
+================================================================================
+
+✓ 0x0000011b  - RPC over SMB (paling umum setelah Windows Update)
+✓ 0x000003e3  - Network Connection Error
+✓ 0x00000709  - Default Printer Error
+✓ 0x00000bcb  - Driver Issues
+✓ 0x00004005  - Access Denied
+✓ 0x00000002  - Printer Not Found
+✓ Dan error printer sharing lainnya
+
+
+================================================================================
+SUPPORT & HELP
+================================================================================
+
+Jika mengalami masalah:
+
+1. Cek Prerequisites
+   Jalankan: Test-Prerequisites.bat
+
+2. Baca Troubleshooting
+   File: README.md (bagian Troubleshooting)
+
+3. Cek Log
+   Log ada di GUI tool saat menjalankan fix
+
+4. Restore Backup
+   Jika fix menyebabkan masalah, restore dari backup
+
+5. Manual Fix
+   Baca: BACKUP-INFO.txt untuk cara restore manual
+
+
+================================================================================
+TIPS & BEST PRACTICES
+================================================================================
+
+✓ Selalu backup sebelum fix
+✓ Jalankan sebagai Administrator
+✓ Fix SERVER dulu, baru CLIENT
+✓ Restart setelah fix
+✓ Simpan backup di tempat aman
+✓ Catat konfigurasi yang working
+✓ Test setelah setiap fix
+
+
+================================================================================
+VERSION INFO
+================================================================================
+
+Current Version: 2.0
+Release Date: 22 Oktober 2024
+Platform: Windows 10/11
+Requirements: PowerShell, Administrator Rights
+
+Lihat CHANGELOG.txt untuk detail update
+
+
+================================================================================
+                    SELAMAT MENGGUNAKAN!
+================================================================================

@@ -1,0 +1,129 @@
+================================================================================
+PRINTER SHARING FIX TOOL - CHANGELOG
+================================================================================
+
+Version 2.0 - 22 Oktober 2024
+------------------------------
+[NEW] Fitur Backup & Restore Registry
+  • Backup otomatis sebelum perbaikan
+  • Restore dari backup jika terjadi masalah
+  • Backup disimpan di Documents\Backup Printer
+  • Timestamp pada setiap backup
+  • Backup terpisah untuk Server dan Client
+
+[NEW] Auto-Elevate Administrator
+  • File PrinterSharingFix-AutoAdmin.bat
+  • Otomatis meminta hak Administrator
+  • Tidak perlu klik kanan "Run as administrator"
+
+[NEW] File Bantuan
+  • MULAI-DISINI.txt - Quick start guide
+  • BACKUP-INFO.txt - Dokumentasi backup/restore
+  • Buka-Folder-Backup.bat - Shortcut ke folder backup
+
+[IMPROVED] GUI Interface
+  • Tombol Backup & Restore di GUI
+  • Log lebih informatif
+  • Konfirmasi backup sebelum perbaikan
+  • Dialog pemilihan backup untuk restore
+
+[IMPROVED] Error Handling
+  • Validasi folder backup
+  • Pesan error lebih jelas
+  • Recovery otomatis jika gagal
+
+
+Version 1.0 - Initial Release
+------------------------------
+[NEW] Fitur Dasar
+  • Fix untuk error 0x0000011b (RPC over SMB)
+  • Fix untuk error 0x000003e3 (Network Connection)
+  • Fix untuk error 0x00000709 (Default Printer)
+  • Fix untuk error 0x00000bcb (Driver Issues)
+
+[NEW] Script Terpisah
+  • PrinterSharingFix-Server.ps1 untuk komputer server
+  • PrinterSharingFix-Client.ps1 untuk komputer client
+
+[NEW] Fitur Server
+  • Nonaktifkan RPC over SMB
+  • Restart Print Spooler Service
+  • Bersihkan Print Queue
+  • Set Printer Sharing Permissions
+  • Enable File and Printer Sharing di Firewall
+  • Konfigurasi SMB Settings
+
+[NEW] Fitur Client
+  • Nonaktifkan RPC over SMB Client
+  • Hapus printer yang bermasalah
+  • Restart Print Spooler Service
+  • Bersihkan Print Queue
+  • Set Point and Print Restrictions
+  • Perbaiki Network Discovery
+  • Reset Printer Driver Cache
+  • Tambah printer manual dengan GUI
+
+[NEW] GUI Interface
+  • Windows Forms GUI
+  • Tombol untuk setiap fix
+  • Tombol "JALANKAN SEMUA PERBAIKAN"
+  • Log aktivitas real-time
+
+[NEW] Launcher
+  • PrinterSharingFix.bat untuk memilih Server/Client
+  • Menu interaktif
+  • Bypass execution policy otomatis
+
+
+================================================================================
+ROADMAP / PLANNED FEATURES
+================================================================================
+
+Version 2.1 (Planned)
+---------------------
+[ ] Export/Import konfigurasi printer
+[ ] Scheduled backup otomatis
+[ ] Email notification untuk admin
+[ ] Remote fix untuk multiple clients
+[ ] Diagnostic tool untuk cek masalah
+[ ] Auto-detect Server vs Client
+[ ] Rollback otomatis jika fix gagal
+[ ] Support untuk printer USB sharing
+
+
+Version 3.0 (Future)
+--------------------
+[ ] Web-based dashboard
+[ ] Centralized management
+[ ] Reporting dan analytics
+[ ] Integration dengan Active Directory
+[ ] Support untuk Linux/Mac clients
+[ ] Cloud backup option
+
+
+================================================================================
+KNOWN ISSUES
+================================================================================
+
+• Beberapa antivirus mungkin flag script sebagai suspicious (false positive)
+  Solusi: Whitelist folder atau disable antivirus sementara
+
+• UAC prompt mungkin muncul multiple kali
+  Solusi: Gunakan PrinterSharingFix-AutoAdmin.bat
+
+• Restore mungkin memerlukan restart kedua kali
+  Solusi: Restart komputer 2x jika perlu
+
+
+================================================================================
+FEEDBACK & CONTRIBUTIONS
+================================================================================
+
+Jika Anda menemukan bug atau punya saran:
+1. Catat error message dari log
+2. Screenshot jika perlu
+3. Catat versi Windows (Win+R > winver)
+4. Catat error code printer yang dialami
+
+
+================================================================================
