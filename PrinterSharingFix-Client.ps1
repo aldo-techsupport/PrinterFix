@@ -401,7 +401,7 @@ function Fix-All {
 
 # Buat Form
 $form = New-Object System.Windows.Forms.Form
-$form.Text = "Printer Sharing Fix - CLIENT"
+$form.Text = "Printer Sharing Fix - CLIENT Software By Alre1408"
 $form.Size = New-Object System.Drawing.Size(700, 650)
 $form.StartPosition = "CenterScreen"
 $form.FormBorderStyle = "FixedDialog"
