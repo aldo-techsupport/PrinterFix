@@ -14,42 +14,6 @@ Tool ini mengatasi berbagai error code printer sharing yang umum terjadi:
 - **0x00000002** - Printer tidak ditemukan
 - Dan berbagai masalah printer sharing lainnya
 
-## File yang Tersedia
-
-### File Utama:
-
-#### 1. PrinterSharingFix-AutoAdmin.bat ⭐ (RECOMMENDED!)
-File batch dengan **auto-elevate Administrator** - Tidak perlu klik kanan "Run as administrator"!
-Cukup double-click dan akan otomatis meminta hak Administrator.
-
-#### 2. PrinterSharingFix.bat (LAUNCHER MANUAL)
-File batch untuk memilih antara Server atau Client dengan menu interaktif.
-Harus dijalankan dengan "Run as administrator".
-
-### File Bantuan:
-
-#### 3. INDEX.txt
-Daftar lengkap semua file dan navigasi cepat.
-
-#### 4. MULAI-DISINI.txt
-Panduan quick start untuk memulai dengan cepat.
-
-#### 5. BACKUP-INFO.txt
-Dokumentasi lengkap tentang sistem backup dan restore.
-
-#### 6. CHANGELOG.txt
-Riwayat perubahan dan update tool.
-
-#### 7. Buka-Folder-Backup.bat
-Shortcut untuk membuka folder backup dengan cepat.
-
-#### 8. Test-Prerequisites.bat
-Tool untuk mengecek apakah sistem siap menjalankan fix (cek Administrator, Print Spooler, dll).
-
-### File Script:
-
-#### 9. PrinterSharingFix-Server.ps1
-Script untuk komputer **SERVER** (komputer yang membagikan printer)
 
 **Fitur:**
 - 💾 **Backup & Restore Registry** - Backup otomatis sebelum perbaikan
@@ -98,15 +62,6 @@ Semua perubahan registry akan di-backup secara otomatis ke:
 5. Pilih **"Yes"** untuk backup registry (sangat direkomendasikan)
 6. Tunggu proses selesai, lalu restart komputer
 
-### Cara Alternatif:
-
-1. Klik kanan pada file **`PrinterSharingFix.bat`**
-2. Pilih **"Run as administrator"**
-3. Pilih menu:
-   - **[1] SERVER** - Jika komputer ini yang share printer
-   - **[2] CLIENT** - Jika komputer ini yang akses printer
-4. Klik tombol **"JALANKAN SEMUA PERBAIKAN"** di GUI yang muncul
-5. Restart komputer setelah selesai
 
 ### Cara Manual:
 
