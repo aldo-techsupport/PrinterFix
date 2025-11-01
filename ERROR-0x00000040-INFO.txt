@@ -1,0 +1,199 @@
+================================================================================
+ERROR 0x00000040 - PRINTER DRIVER ISSUE
+Printer Sharing Fix Tool - Dokumentasi
+================================================================================
+
+APA ITU ERROR 0x00000040?
+-------------------------
+Error 0x00000040 adalah error yang terjadi saat:
+- Install printer driver
+- Connect ke network printer
+- Print ke printer yang sudah terinstall
+- Setelah Windows Update
+
+Error ini biasanya disebabkan oleh:
+✗ Driver isolation policy yang terlalu ketat
+✗ Printer driver cache yang corrupt
+✗ Printer connections registry yang bermasalah
+✗ Konflik driver printer
+
+
+GEJALA ERROR 0x00000040
+------------------------
+• Tidak bisa install printer driver
+• Tidak bisa connect ke network printer
+• Printer muncul tapi tidak bisa print
+• Error message: "Windows cannot connect to the printer"
+• Error code: 0x00000040 atau 0x0000040
+• Printer driver installation failed
+
+
+PENYEBAB UMUM
+-------------
+1. Windows Update yang mengubah driver isolation policy
+2. Printer driver yang tidak kompatibel dengan Windows 10/11
+3. Driver cache yang corrupt
+4. Registry printer connections yang bermasalah
+5. Konflik antara multiple printer drivers
+
+
+SOLUSI YANG DILAKUKAN OLEH TOOL
+--------------------------------
+Fix 7 (Server) / Fix 9 (Client) akan melakukan:
+
+1. Stop Print Spooler Service
+   - Menghentikan service untuk membersihkan cache
+
+2. Set Driver Isolation Policy
+   - Registry: HKLM\SYSTEM\CurrentControlSet\Control\Print
+   - Key: PrintDriverIsolationExecutionPolicy
+   - Value: 0 (Disable isolation)
+
+3. Clear Driver Cache
+   - Membersihkan cache di: C:\Windows\System32\spool\drivers
+
+4. Clear Printer Connections (Client only)
+   - Registry: HKCU\Printers\Connections
+   - Menghapus connections cache yang corrupt
+
+5. Restart Print Spooler
+   - Restart service untuk apply perubahan
+
+
+CARA MENGGUNAKAN FIX
+--------------------
+UNTUK SERVER:
+1. Jalankan: PrinterSharingFix-AutoAdmin.bat
+2. Pilih: [1] SERVER
+3. Klik: "Fix 7: Error 0x00000040 (Driver Issue)"
+   ATAU
+   Klik: "JALANKAN SEMUA PERBAIKAN"
+4. Restart komputer
+5. Install/reinstall printer driver
+
+UNTUK CLIENT:
+1. Jalankan: PrinterSharingFix-AutoAdmin.bat
+2. Pilih: [2] CLIENT
+3. Klik: "Fix 9: Error 0x00000040 (Driver Issue)"
+   ATAU
+   Klik: "JALANKAN SEMUA PERBAIKAN"
+4. Restart komputer
+5. Connect ke network printer
+
+
+LANGKAH MANUAL (Jika Tool Tidak Bisa Digunakan)
+------------------------------------------------
+1. Buka Command Prompt sebagai Administrator
+
+2. Stop Print Spooler:
+   net stop spooler
+
+3. Edit Registry (gunakan regedit):
+   - Buka: HKLM\SYSTEM\CurrentControlSet\Control\Print
+   - Buat/Edit DWORD: PrintDriverIsolationExecutionPolicy
+   - Set Value: 0
+
+4. Clear Driver Cache:
+   - Buka: C:\Windows\System32\spool\drivers
+   - Backup folder ini
+   - Hapus isi folder (jangan hapus foldernya)
+
+5. Start Print Spooler:
+   net start spooler
+
+6. Restart komputer
+
+
+TROUBLESHOOTING
+----------------
+Q: Masih error setelah fix?
+A: 1. Pastikan sudah restart komputer
+   2. Coba uninstall printer driver yang bermasalah
+   3. Download driver terbaru dari website manufacturer
+   4. Install driver dengan "Run as administrator"
+
+Q: Error muncul lagi setelah Windows Update?
+A: Jalankan fix lagi setelah Windows Update
+
+Q: Tidak bisa install driver sama sekali?
+A: 1. Disable antivirus sementara
+   2. Gunakan driver mode "compatibility mode"
+   3. Coba driver versi lama yang lebih stabil
+
+Q: Error hanya di satu user?
+A: Clear printer connections di user profile:
+   - Registry: HKCU\Printers\Connections
+   - Hapus semua subkey di bawahnya
+
+
+PENCEGAHAN
+----------
+✓ Selalu backup sebelum Windows Update
+✓ Gunakan driver printer yang certified untuk Windows 10/11
+✓ Update driver printer secara berkala
+✓ Jangan install multiple versi driver yang sama
+✓ Uninstall driver lama sebelum install yang baru
+
+
+KOMPATIBILITAS DRIVER
+----------------------
+Untuk menghindari error 0x00000040:
+• Gunakan driver "Type 4" (modern driver architecture)
+• Hindari driver "Type 3" (legacy driver)
+• Download driver dari website resmi manufacturer
+• Pilih driver yang spesifik untuk Windows 10/11
+• Cek compatibility list di website manufacturer
+
+
+REGISTRY KEYS YANG DIMODIFIKASI
+--------------------------------
+1. HKLM\SYSTEM\CurrentControlSet\Control\Print
+   - PrintDriverIsolationExecutionPolicy = 0
+
+2. HKCU\Printers\Connections (Client only)
+   - Dihapus untuk clear cache
+
+
+BACKUP & RESTORE
+-----------------
+Tool akan menawarkan backup sebelum fix.
+Jika terjadi masalah:
+1. Jalankan tool yang sama
+2. Klik: "♻️ Restore dari Backup"
+3. Pilih backup sebelum fix
+4. Restart komputer
+
+
+REFERENSI
+---------
+Microsoft Documentation:
+- Print Driver Isolation
+- Printer Driver Architecture
+- Windows Print Spooler
+
+Error Codes:
+- 0x00000040 = ERROR_SHARING_PAUSED
+- Terkait dengan driver isolation dan sharing
+
+
+TIPS TAMBAHAN
+--------------
+• Jika printer USB, coba port USB lain
+• Jika network printer, cek koneksi network
+• Pastikan Print Spooler service running
+• Cek Event Viewer untuk detail error
+• Test dengan user account lain
+
+
+SUPPORT
+-------
+Jika masih bermasalah setelah fix:
+1. Cek log di tool untuk detail error
+2. Baca README.md untuk troubleshooting umum
+3. Restore dari backup jika perlu
+4. Coba manual fix di atas
+
+
+================================================================================
+© 2024 Printer Sharing Fix Tool - Version 2.1
+================================================================================

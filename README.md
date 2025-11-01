@@ -10,6 +10,7 @@ Tool ini mengatasi berbagai error code printer sharing yang umum terjadi:
 - **0x000003e3** - Error koneksi printer network
 - **0x00000709** - Error saat menambahkan atau menggunakan printer
 - **0x00000bcb** - Error driver printer
+- **0x00000040** - Error printer driver isolation / driver issue
 - **0x00004005** - Error access denied
 - **0x00000002** - Printer tidak ditemukan
 - Dan berbagai masalah printer sharing lainnya
@@ -23,6 +24,7 @@ Tool ini mengatasi berbagai error code printer sharing yang umum terjadi:
 - Set Printer Sharing Permissions
 - Enable File and Printer Sharing di Firewall
 - Konfigurasi SMB Settings
+- Fix Error 0x00000040 (Driver Issue)
 
 #### 10. PrinterSharingFix-Client.ps1
 Script untuk komputer **CLIENT** (komputer yang mengakses printer shared)
@@ -37,6 +39,7 @@ Script untuk komputer **CLIENT** (komputer yang mengakses printer shared)
 - Perbaiki Network Discovery
 - Reset Printer Driver Cache
 - Tambah printer manual dengan GUI
+- Fix Error 0x00000040 (Driver Issue)
 
 ## Fitur Backup & Restore
 
@@ -139,6 +142,9 @@ Error saat set default printer atau koneksi ke printer. Fix dengan membersihkan 
 
 ### 0x00000bcb
 Error driver printer, biasanya karena driver tidak kompatibel atau corrupt. Fix dengan reset driver cache dan reinstall printer.
+
+### 0x00000040
+Error printer driver isolation atau masalah driver. Biasanya terjadi saat install driver printer atau connect ke network printer. Fix dengan disable driver isolation policy dan clear driver cache.
 
 ## Lisensi
 

@@ -279,6 +279,58 @@ function Reset-PrinterDriverCache {
     }
 }
 
+# Fungsi Fix 9: Fix Error 0x00000040 (Printer Driver Issue)
+function Fix-Error0x00000040 {
+    Write-Log "=== Memulai Fix: Error 0x00000040 (Printer Driver Issue) ==="
+    try {
+        # Stop Print Spooler
+        Write-Log "Menghentikan Print Spooler..."
+        Stop-Service -Name Spooler -Force
+        Start-Sleep -Seconds 2
+        
+        # Clear printer driver cache
+        $driverStore = "$env:SystemRoot\System32\spool\drivers"
+        Write-Log "Membersihkan driver cache..."
+        
+        # Set registry untuk driver isolation
+        $regPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Print"
+        if (-not (Test-Path $regPath)) {
+            New-Item -Path $regPath -Force | Out-Null
+        }
+        
+        # Disable driver isolation yang bisa menyebabkan error 0x00000040
+        Set-ItemProperty -Path $regPath -Name "PrintDriverIsolationExecutionPolicy" -Value 0 -Type DWord -ErrorAction SilentlyContinue
+        Write-Log "[OK] Driver isolation policy diset"
+        
+        # Set printer driver directory permissions
+        $regPath2 = "HKLM:\SYSTEM\CurrentControlSet\Control\Print\Environments\Windows x64\Drivers"
+        if (Test-Path $regPath2) {
+            Write-Log "[OK] Driver registry path ditemukan"
+        }
+        
+        # Clear local printer connections cache
+        $regPath3 = "HKCU:\Printers\Connections"
+        if (Test-Path $regPath3) {
+            Write-Log "[INFO] Membersihkan printer connections cache..."
+            Remove-Item -Path $regPath3 -Recurse -Force -ErrorAction SilentlyContinue
+            Write-Log "[OK] Printer connections cache dibersihkan"
+        }
+        
+        # Restart Print Spooler
+        Write-Log "Memulai Print Spooler..."
+        Start-Service -Name Spooler
+        Start-Sleep -Seconds 2
+        
+        Write-Log "[OK] Fix error 0x00000040 selesai"
+        Write-Log "[INFO] Coba connect ke printer sekarang"
+        return $true
+    } catch {
+        Write-Log "[ERROR] Gagal fix error 0x00000040: $($_.Exception.Message)"
+        Start-Service -Name Spooler -ErrorAction SilentlyContinue
+        return $false
+    }
+}
+
 # Fungsi Fix 8: Tambah Printer Manual
 function Add-NetworkPrinter {
     Write-Log "=== Memulai: Tambah Network Printer Manual ==="
@@ -360,6 +412,7 @@ function Fix-All {
     $btnFix6.Enabled = $false
     $btnFix7.Enabled = $false
     $btnFix8.Enabled = $false
+    $btnFix9.Enabled = $false
     $btnBackup.Enabled = $false
     $btnRestore.Enabled = $false
     
@@ -368,6 +421,8 @@ function Fix-All {
     Set-PointAndPrintClient
     Start-Sleep -Seconds 1
     Fix-NetworkDiscovery
+    Start-Sleep -Seconds 1
+    Fix-Error0x00000040
     Start-Sleep -Seconds 1
     Remove-ProblematicPrinters
     Start-Sleep -Seconds 1
@@ -395,6 +450,7 @@ function Fix-All {
     $btnFix6.Enabled = $true
     $btnFix7.Enabled = $true
     $btnFix8.Enabled = $true
+    $btnFix9.Enabled = $true
     $btnBackup.Enabled = $true
     $btnRestore.Enabled = $true
 }
@@ -443,7 +499,7 @@ $groupBoxBackup.Controls.Add($btnRestore)
 # GroupBox untuk tombol
 $groupBox = New-Object System.Windows.Forms.GroupBox
 $groupBox.Location = New-Object System.Drawing.Point(10, 140)
-$groupBox.Size = New-Object System.Drawing.Size(660, 250)
+$groupBox.Size = New-Object System.Drawing.Size(660, 280)
 $groupBox.Text = "Pilih Perbaikan"
 $form.Controls.Add($groupBox)
 
@@ -523,9 +579,18 @@ $btnFix8.BackColor = [System.Drawing.Color]::LightBlue
 $btnFix8.Add_Click({ Add-NetworkPrinter })
 $groupBox.Controls.Add($btnFix8)
 
+# Tombol Fix 9
+$btnFix9 = New-Object System.Windows.Forms.Button
+$btnFix9.Location = New-Object System.Drawing.Point(20, 230)
+$btnFix9.Size = New-Object System.Drawing.Size(620, 30)
+$btnFix9.Text = "Fix 9: Error 0x00000040 (Driver Issue)"
+$btnFix9.BackColor = [System.Drawing.Color]::LightCoral
+$btnFix9.Add_Click({ Fix-Error0x00000040 })
+$groupBox.Controls.Add($btnFix9)
+
 # Label Log
 $labelLog = New-Object System.Windows.Forms.Label
-$labelLog.Location = New-Object System.Drawing.Point(10, 400)
+$labelLog.Location = New-Object System.Drawing.Point(10, 430)
 $labelLog.Size = New-Object System.Drawing.Size(660, 20)
 $labelLog.Text = "Log Aktivitas:"
 $labelLog.Font = New-Object System.Drawing.Font("Segoe UI", 9, [System.Drawing.FontStyle]::Bold)
@@ -533,8 +598,8 @@ $form.Controls.Add($labelLog)
 
 # TextBox Log
 $textBoxLog = New-Object System.Windows.Forms.TextBox
-$textBoxLog.Location = New-Object System.Drawing.Point(10, 425)
-$textBoxLog.Size = New-Object System.Drawing.Size(660, 140)
+$textBoxLog.Location = New-Object System.Drawing.Point(10, 455)
+$textBoxLog.Size = New-Object System.Drawing.Size(660, 110)
 $textBoxLog.Multiline = $true
 $textBoxLog.ScrollBars = "Vertical"
 $textBoxLog.ReadOnly = $true

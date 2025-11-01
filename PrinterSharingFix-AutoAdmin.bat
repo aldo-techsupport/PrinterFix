@@ -33,6 +33,7 @@ echo   - 0x0000011b (RPC over SMB)
 echo   - 0x000003e3 (Network Connection)
 echo   - 0x00000709 (Default Printer)
 echo   - 0x00000bcb (Driver Issues)
+echo   - 0x00000040 (Driver Isolation)
 echo   - Dan error printer sharing lainnya
 echo.
 echo ============================================
