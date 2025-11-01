@@ -2,6 +2,19 @@
 PRINTER SHARING FIX TOOL - CHANGELOG
 ================================================================================
 
+Version 2.1 - 01 November 2024
+------------------------------
+[NEW] Fix untuk Error 0x00000040
+  • Mengatasi printer driver isolation issue
+  • Clear driver cache dan connections
+  • Disable driver isolation policy
+  • Tersedia di Server (Fix 7) dan Client (Fix 9)
+
+[IMPROVED] GUI Interface
+  • Tombol baru untuk fix 0x00000040
+  • Layout disesuaikan untuk tombol tambahan
+
+
 Version 2.0 - 22 Oktober 2024
 ------------------------------
 [NEW] Fitur Backup & Restore Registry

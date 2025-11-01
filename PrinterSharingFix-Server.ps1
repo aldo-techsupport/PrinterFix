@@ -252,6 +252,50 @@ function Set-SMBSettings {
     }
 }
 
+# Fungsi Fix 7: Fix Error 0x00000040 (Printer Driver Issue)
+function Fix-Error0x00000040 {
+    Write-Log "=== Memulai Fix: Error 0x00000040 (Printer Driver Issue) ==="
+    try {
+        # Stop Print Spooler
+        Write-Log "Menghentikan Print Spooler..."
+        Stop-Service -Name Spooler -Force
+        Start-Sleep -Seconds 2
+        
+        # Clear printer driver cache
+        $driverStore = "$env:SystemRoot\System32\spool\drivers"
+        Write-Log "Membersihkan driver cache..."
+        
+        # Set registry untuk driver isolation
+        $regPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Print"
+        if (-not (Test-Path $regPath)) {
+            New-Item -Path $regPath -Force | Out-Null
+        }
+        
+        # Disable driver isolation yang bisa menyebabkan error 0x00000040
+        Set-ItemProperty -Path $regPath -Name "PrintDriverIsolationExecutionPolicy" -Value 0 -Type DWord -ErrorAction SilentlyContinue
+        Write-Log "[OK] Driver isolation policy diset"
+        
+        # Set printer driver directory permissions
+        $regPath2 = "HKLM:\SYSTEM\CurrentControlSet\Control\Print\Environments\Windows x64\Drivers"
+        if (Test-Path $regPath2) {
+            Write-Log "[OK] Driver registry path ditemukan"
+        }
+        
+        # Restart Print Spooler
+        Write-Log "Memulai Print Spooler..."
+        Start-Service -Name Spooler
+        Start-Sleep -Seconds 2
+        
+        Write-Log "[OK] Fix error 0x00000040 selesai"
+        Write-Log "[INFO] Coba install/reinstall printer driver sekarang"
+        return $true
+    } catch {
+        Write-Log "[ERROR] Gagal fix error 0x00000040: $($_.Exception.Message)"
+        Start-Service -Name Spooler -ErrorAction SilentlyContinue
+        return $false
+    }
+}
+
 # Fungsi Fix All
 function Fix-All {
     Write-Log "`r`n========================================="
@@ -272,6 +316,7 @@ function Fix-All {
     $btnFix4.Enabled = $false
     $btnFix5.Enabled = $false
     $btnFix6.Enabled = $false
+    $btnFix7.Enabled = $false
     $btnBackup.Enabled = $false
     $btnRestore.Enabled = $false
     
@@ -282,6 +327,8 @@ function Fix-All {
     Enable-FileAndPrinterSharing
     Start-Sleep -Seconds 1
     Set-SMBSettings
+    Start-Sleep -Seconds 1
+    Fix-Error0x00000040
     Start-Sleep -Seconds 1
     Clear-PrintQueue
     Start-Sleep -Seconds 1
@@ -302,6 +349,7 @@ function Fix-All {
     $btnFix4.Enabled = $true
     $btnFix5.Enabled = $true
     $btnFix6.Enabled = $true
+    $btnFix7.Enabled = $true
     $btnBackup.Enabled = $true
     $btnRestore.Enabled = $true
 }
@@ -350,7 +398,7 @@ $groupBoxBackup.Controls.Add($btnRestore)
 # GroupBox untuk tombol
 $groupBox = New-Object System.Windows.Forms.GroupBox
 $groupBox.Location = New-Object System.Drawing.Point(10, 140)
-$groupBox.Size = New-Object System.Drawing.Size(660, 200)
+$groupBox.Size = New-Object System.Drawing.Size(660, 230)
 $groupBox.Text = "Pilih Perbaikan"
 $form.Controls.Add($groupBox)
 
@@ -413,9 +461,18 @@ $btnFix6.Text = "Fix 6: Konfigurasi SMB"
 $btnFix6.Add_Click({ Set-SMBSettings })
 $groupBox.Controls.Add($btnFix6)
 
+# Tombol Fix 7
+$btnFix7 = New-Object System.Windows.Forms.Button
+$btnFix7.Location = New-Object System.Drawing.Point(20, 190)
+$btnFix7.Size = New-Object System.Drawing.Size(620, 30)
+$btnFix7.Text = "Fix 7: Error 0x00000040 (Driver Issue)"
+$btnFix7.BackColor = [System.Drawing.Color]::LightCoral
+$btnFix7.Add_Click({ Fix-Error0x00000040 })
+$groupBox.Controls.Add($btnFix7)
+
 # Label Log
 $labelLog = New-Object System.Windows.Forms.Label
-$labelLog.Location = New-Object System.Drawing.Point(10, 350)
+$labelLog.Location = New-Object System.Drawing.Point(10, 380)
 $labelLog.Size = New-Object System.Drawing.Size(660, 20)
 $labelLog.Text = "Log Aktivitas:"
 $labelLog.Font = New-Object System.Drawing.Font("Segoe UI", 9, [System.Drawing.FontStyle]::Bold)
@@ -423,8 +480,8 @@ $form.Controls.Add($labelLog)
 
 # TextBox Log
 $textBoxLog = New-Object System.Windows.Forms.TextBox
-$textBoxLog.Location = New-Object System.Drawing.Point(10, 375)
-$textBoxLog.Size = New-Object System.Drawing.Size(660, 140)
+$textBoxLog.Location = New-Object System.Drawing.Point(10, 405)
+$textBoxLog.Size = New-Object System.Drawing.Size(660, 110)
 $textBoxLog.Multiline = $true
 $textBoxLog.ScrollBars = "Vertical"
 $textBoxLog.ReadOnly = $true

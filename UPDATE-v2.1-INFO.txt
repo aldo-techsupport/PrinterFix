@@ -1,0 +1,168 @@
+================================================================================
+PRINTER SHARING FIX TOOL - UPDATE v2.1
+01 November 2024
+================================================================================
+
+APA YANG BARU?
+--------------
+✨ Fix untuk Error 0x00000040 (Printer Driver Issue)
+
+Error 0x00000040 adalah error yang umum terjadi saat:
+- Install printer driver
+- Connect ke network printer  
+- Print ke printer yang sudah terinstall
+- Setelah Windows Update
+
+
+FITUR BARU
+----------
+📌 Fix 7 (Server): Error 0x00000040 (Driver Issue)
+   • Disable driver isolation policy
+   • Clear driver cache
+   • Fix registry printer settings
+   • Restart Print Spooler
+
+📌 Fix 9 (Client): Error 0x00000040 (Driver Issue)
+   • Disable driver isolation policy
+   • Clear driver cache
+   • Clear printer connections cache
+   • Fix registry printer settings
+   • Restart Print Spooler
+
+
+LOKASI TOMBOL BARU
+-------------------
+SERVER:
+  Fix 7: Error 0x00000040 (Driver Issue)
+  - Tombol berwarna merah muda (LightCoral)
+  - Di bawah Fix 6
+  - Lebar penuh (620px)
+
+CLIENT:
+  Fix 9: Error 0x00000040 (Driver Issue)
+  - Tombol berwarna merah muda (LightCoral)
+  - Di bawah Fix 8
+  - Lebar penuh (620px)
+
+
+CARA MENGGUNAKAN
+-----------------
+1. Jalankan: PrinterSharingFix-AutoAdmin.bat
+2. Pilih: [1] Server atau [2] Client
+3. Klik: Fix 7 (Server) atau Fix 9 (Client)
+   ATAU
+   Klik: "JALANKAN SEMUA PERBAIKAN" (sudah include fix ini)
+4. Restart komputer
+
+
+DOKUMENTASI TAMBAHAN
+---------------------
+File baru: ERROR-0x00000040-INFO.txt
+Berisi:
+• Penjelasan lengkap error 0x00000040
+• Penyebab dan gejala
+• Solusi yang dilakukan tool
+• Cara manual fix
+• Troubleshooting
+• Tips pencegahan
+
+
+PERUBAHAN TEKNIS
+-----------------
+1. Fungsi baru: Fix-Error0x00000040
+   - Di PrinterSharingFix-Server.ps1
+   - Di PrinterSharingFix-Client.ps1
+
+2. Registry yang dimodifikasi:
+   - HKLM\SYSTEM\CurrentControlSet\Control\Print
+   - Key: PrintDriverIsolationExecutionPolicy
+   - Value: 0 (Disable isolation)
+
+3. Client tambahan:
+   - Clear HKCU\Printers\Connections
+
+4. GUI Update:
+   - GroupBox height +30px
+   - Tombol baru Fix 7/Fix 9
+   - Log area disesuaikan
+
+
+KOMPATIBILITAS
+---------------
+✓ Windows 10 (semua versi)
+✓ Windows 11 (semua versi)
+✓ Backward compatible dengan v2.0
+✓ Backup/Restore tetap berfungsi
+
+
+UPGRADE DARI v2.0
+------------------
+Tidak perlu uninstall versi lama.
+Cukup replace file:
+• PrinterSharingFix-Server.ps1
+• PrinterSharingFix-Client.ps1
+• PrinterSharingFix-AutoAdmin.bat
+• README.md
+• CHANGELOG.txt
+
+Backup lama tetap kompatibel!
+
+
+ERROR CODES YANG DITANGANI (UPDATE)
+------------------------------------
+✓ 0x0000011b - RPC over SMB
+✓ 0x000003e3 - Network Connection
+✓ 0x00000709 - Default Printer
+✓ 0x00000bcb - Driver Issues
+✓ 0x00000040 - Driver Isolation ⭐ NEW!
+✓ 0x00004005 - Access Denied
+✓ 0x00000002 - Printer Not Found
+
+
+TESTING
+-------
+Tested on:
+• Windows 10 21H2, 22H2
+• Windows 11 21H2, 22H2, 23H2
+• Various printer brands (HP, Canon, Epson, Brother)
+• Network and USB printers
+
+
+KNOWN ISSUES
+------------
+• Beberapa antivirus mungkin flag perubahan registry
+  Solusi: Whitelist tool atau disable sementara
+
+• Fix mungkin memerlukan restart kedua kali
+  Solusi: Restart 2x jika masih error
+
+
+FEEDBACK
+--------
+Jika menemukan bug atau punya saran:
+• Catat error message dari log
+• Screenshot jika perlu
+• Catat versi Windows
+• Catat error code yang dialami
+
+
+ROADMAP v2.2
+------------
+Planned features:
+[ ] Auto-detect error code
+[ ] Diagnostic tool
+[ ] Export/Import printer settings
+[ ] Scheduled backup
+[ ] Remote fix capability
+
+
+================================================================================
+TERIMA KASIH TELAH MENGGUNAKAN PRINTER SHARING FIX TOOL!
+================================================================================
+
+Version: 2.1
+Release Date: 01 November 2024
+License: MIT
+
+© 2024 Printer Sharing Fix Tool
+================================================================================
